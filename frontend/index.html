@@ -16,8 +16,8 @@
     <div class="brand-container">
       <div class="brand-logo">Ψ</div>
       <div>
-        <div class="brand-title">QuRoute <span style="font-size:0.75rem; font-weight:600; color:#a1a1aa;">| SIH26137</span></div>
-        <div style="font-size: 0.71rem; color: #a1a1aa;">Team 151198 — Visionaries for Change • Quantum-Inspired DCVRPTW Engine</div>
+        <div class="brand-title">QuRoute <span style="font-size:0.75rem; font-weight:600; color:#38bdf8;">| SIH26137</span></div>
+        <div style="font-size: 0.71rem; color: #94a3b8;">Team 151198 — Visionaries for Change • Quantum-Inspired DCVRPTW Engine</div>
       </div>
       <span class="badge-tag" id="headerModeBadge">GRID</span>
     </div>
@@ -49,7 +49,7 @@
         <span class="status-dot" id="headerStatusDot"></span>
         <span id="headerClock" style="font-family:monospace; font-weight:700;">09:00</span>
       </div>
-      <div class="status-pill">
+      <div class="status-pill" style="color: #38bdf8;">
         <span id="headerCongestionMult">BPR 1.62x</span>
       </div>
     </div>
@@ -62,15 +62,15 @@
       <div class="canvas-toolbar">
         <div style="display:flex; align-items:center; gap:12px; font-size:0.85rem;">
           <span style="font-weight:700; color:#fff;">QuRoute Dynamic BPR Network Canvas</span>
-          <span id="bprFormulaBadge" style="font-size:0.73rem; color:#a1a1aa; font-family:monospace;">t(e) = t₀·(1 + 0.15·(v/c)⁴)</span>
+          <span id="bprFormulaBadge" style="font-size:0.73rem; color:#38bdf8; font-family:monospace;">t(e) = t₀·(1 + 0.15·(v/c)⁴)</span>
         </div>
         <div style="display:flex; align-items:center; gap:12px;">
           <button class="btn" id="btnFitMap" style="padding:4px 10px; font-size:0.75rem;">Reset View</button>
           <div class="legend-group">
-            <div class="legend-item"><div class="legend-color" style="background:#f59e0b;"></div> Depot</div>
-            <div class="legend-item"><div class="legend-color" style="background:#2563eb;"></div> Customer</div>
-            <div class="legend-item"><div class="legend-color" style="background:#a1a1aa;"></div> Free Flow</div>
-            <div class="legend-item"><div class="legend-color" style="background:#f87171;"></div> BPR Jam/Closed</div>
+            <div class="legend-item"><div class="legend-color" style="background:#eab308;"></div> Depot</div>
+            <div class="legend-item"><div class="legend-color" style="background:#0284c7;"></div> Customer</div>
+            <div class="legend-item"><div class="legend-color" style="background:#4ade80;"></div> Free Flow</div>
+            <div class="legend-item"><div class="legend-color" style="background:#ef4444;"></div> BPR Jam/Closed</div>
             <div class="legend-item"><div class="legend-color" style="background:#fbbf24;"></div> A* Path</div>
           </div>
         </div>
@@ -93,8 +93,8 @@
           </div>
         </div>
         <div style="text-align:right; min-width:120px;">
-          <div style="font-size:0.72rem; color:#a1a1aa;">Diurnal BPR Flow</div>
-          <div id="rushFactorText" style="font-weight:700; color:#f4f4f5; font-size:1.1rem;">1.62x</div>
+          <div style="font-size:0.72rem; color:#94a3b8;">Diurnal BPR Flow</div>
+          <div id="rushFactorText" style="font-weight:800; color:#f59e0b; font-size:1.1rem;">1.62x</div>
         </div>
       </div>
     </div>
@@ -209,10 +209,10 @@
             <span>QuRoute Solution Manifest</span>
             <button class="btn" id="btnClearRoute" style="padding:2px 8px; font-size:0.7rem;">Clear</button>
           </div>
-          <div style="font-size:0.82rem; color:#d4d4d8; margin-bottom:8px;">
-            Total Travel Time: <strong id="builderOutcomeTime" style="color:#ffffff;">-- min</strong> | Status: <strong id="builderOutcomeStatus" style="color:#34d399;">FEASIBLE</strong>
+          <div style="font-size:0.82rem; color:#cbd5e1; margin-bottom:8px;">
+            Total Travel Time: <strong id="builderOutcomeTime" style="color:#00f2fe;">-- min</strong> | Status: <strong id="builderOutcomeStatus" style="color:#10b981;">FEASIBLE</strong>
           </div>
-          <div style="font-size:0.75rem; color:#a1a1aa; margin-bottom:8px;">Click a vehicle card to isolate its street trajectory:</div>
+          <div style="font-size:0.75rem; color:#94a3b8; margin-bottom:8px;">Click a vehicle card to isolate its street trajectory:</div>
           <div class="route-manifest-container" id="builderVehicleList"></div>
         </div>
 
@@ -249,9 +249,9 @@
               <input type="number" id="bprBetaInput" value="4.0" step="0.5" min="1.0" max="8.0">
             </div>
           </div>
-          <div style="display:flex; align-items:center; gap:8px; padding:8px; background:#18181b; border:1px solid #27272a; border-radius:6px; margin-bottom:10px;">
+          <div style="display:flex; align-items:center; gap:8px; padding:8px; background:rgba(56,189,248,0.1); border:1px solid rgba(56,189,248,0.3); border-radius:6px; margin-bottom:10px;">
             <input type="checkbox" id="blackoutToggle" style="width:18px; height:18px;">
-            <label for="blackoutToggle" style="font-size:0.82rem; font-weight:600; color:#f4f4f5; cursor:pointer;">
+            <label for="blackoutToggle" style="font-size:0.82rem; font-weight:600; color:#38bdf8; cursor:pointer;">
               📡 Simulate Live Traffic Data Blackout (Fallback to Diurnal Curve)
             </label>
           </div>
@@ -277,19 +277,19 @@
         <!-- Layer 3: Manual Overrides & Warm-Started Sub-Second Re-route -->
         <div class="card" id="selectedEdgePanel">
           <div class="card-title">Layer 3: Edge Override & Warm-Start Re-route</div>
-          <div id="edgeEndpoints" style="font-size:0.82rem; color:#d4d4d8; margin-bottom:8px; font-weight:600;">
+          <div id="edgeEndpoints" style="font-size:0.82rem; color:#cbd5e1; margin-bottom:8px; font-weight:600;">
             Click any road edge on the canvas to inspect/override flow.
           </div>
           <div class="form-group">
             <div class="slider-labels">
               <label>Manual Congestion Factor</label>
-              <span id="edgeCongestionVal" style="font-weight:700; color:#ffffff;">1.00x</span>
+              <span id="edgeCongestionVal" style="font-weight:700; color:#00f2fe;">1.00x</span>
             </div>
             <input type="range" id="edgeCongestionSlider" min="1.0" max="10.0" step="0.2" value="1.0">
           </div>
           <div style="display:flex; align-items:center; gap:8px; margin-top:10px; margin-bottom:12px;">
             <input type="checkbox" id="edgeClosedToggle" style="width:18px; height:18px;">
-            <label for="edgeClosedToggle" style="font-size:0.85rem; font-weight:600; color:#f87171; cursor:pointer;">
+            <label for="edgeClosedToggle" style="font-size:0.85rem; font-weight:600; color:#f43f5e; cursor:pointer;">
               Close this road (Live Roadblock)
             </label>
           </div>
@@ -353,7 +353,7 @@
           </div>
           <div class="stat-item">
             <div class="stat-title">Final Travel Time</div>
-            <div class="stat-value" id="singleFinalCost" style="color:#ffffff;">--</div>
+            <div class="stat-value" id="singleFinalCost" style="color:#00f2fe;">--</div>
           </div>
           <div class="stat-item">
             <div class="stat-title">Wall Runtime</div>
@@ -378,7 +378,7 @@
       <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
         <div>
           <h2 style="font-size:1.35rem; font-weight:800; color:#fff;">Benchmark Arena: Equal Evaluation Budget Race</h2>
-          <div style="font-size:0.82rem; color:#a1a1aa;">
+          <div style="font-size:0.82rem; color:#94a3b8;">
             All solvers execute on the identical graph snapshot, identical random seed, and identical fitness evaluation budget.
           </div>
         </div>
@@ -390,7 +390,7 @@
       <div class="chart-card" style="height:320px; margin-bottom:16px;">
         <div class="chart-header">
           <span>Overlaid Convergence Curves against Fitness Evaluations (eval_budget)</span>
-          <span class="badge-tag" style="background:#18181b; border-color:#27272a; color:#f4f4f5;">FAIR EVALUATION BUDGET</span>
+          <span class="badge-tag" style="background:rgba(16,185,129,0.2); border-color:#10b981; color:#10b981;">FAIR EVALUATION BUDGET</span>
         </div>
         <canvas id="raceConvergenceChart"></canvas>
       </div>
@@ -411,7 +411,7 @@
             </thead>
             <tbody id="scoreboardBody">
               <tr>
-                <td colspan="6" style="text-align:center; color:#a1a1aa; padding:24px;">
+                <td colspan="6" style="text-align:center; color:#94a3b8; padding:24px;">
                   Click "START EQUAL-BUDGET BENCHMARK RACE" to compare all algorithms fairly.
                 </td>
               </tr>
@@ -433,7 +433,7 @@
       <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
         <div>
           <h2 style="font-size:1.35rem; font-weight:800; color:#fff;">Google Maps A* vs. QuRoute QPSO Swarm</h2>
-          <div style="font-size:0.82rem; color:#a1a1aa;">
+          <div style="font-size:0.82rem; color:#94a3b8;">
             Why point-to-point A* fails at fleet coordination and how QuRoute pairs QPSO macro-allocation with A* street execution.
           </div>
         </div>
@@ -449,18 +449,18 @@
         </div>
         <div style="display:flex; gap:12px; align-items:center;">
           <div style="flex:1;">
-            <label style="font-size:0.75rem; color:#a1a1aa;">Start Node ID</label>
+            <label style="font-size:0.75rem; color:#94a3b8;">Start Node ID</label>
             <input type="number" id="astarStartInput" value="0" min="0">
           </div>
           <div style="flex:1;">
-            <label style="font-size:0.75rem; color:#a1a1aa;">Goal Node ID</label>
+            <label style="font-size:0.75rem; color:#94a3b8;">Goal Node ID</label>
             <input type="number" id="astarGoalInput" value="5" min="0">
           </div>
           <button class="btn btn-accent" id="btnExecuteAStar" style="margin-top:16px; padding:8px 18px;">
             Find A* Street Path
           </button>
         </div>
-        <div id="astarResultMetrics" style="display:none; margin-top:12px; font-size:0.82rem; color:#d4d4d8; background:#18181b; padding:8px 12px; border-radius:6px; border:1px solid #27272a;">
+        <div id="astarResultMetrics" style="display:none; margin-top:12px; font-size:0.82rem; color:#cbd5e1; background:rgba(0,0,0,0.3); padding:8px 12px; border-radius:6px;">
           A* Travel Time: <strong id="astarMetricTime" style="color:#fbbf24;">-- min</strong> | Distance: <strong id="astarMetricDist">-- km</strong> | Nodes Explored: <strong id="astarMetricExplored">--</strong>
         </div>
       </div>
@@ -468,10 +468,10 @@
       <div class="astar-vs-qpso-grid">
         <div class="algo-compare-card inviable">
           <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
-            <h4 style="color:#f87171; font-size:1.05rem;">❌ Why Pure A* Fails at Swarm Optimization</h4>
-            <span class="badge-tag" style="border-color:#f87171; color:#f87171;">1-TO-1 ONLY</span>
+            <h4 style="color:#f43f5e; font-size:1.05rem;">❌ Why Pure A* Fails at Swarm Optimization</h4>
+            <span class="badge-tag" style="border-color:#f43f5e; color:#f43f5e;">1-TO-1 ONLY</span>
           </div>
-          <ul style="font-size:0.83rem; color:#d4d4d8; line-height:1.6; padding-left:18px; display:flex; flex-direction:column; gap:8px;">
+          <ul style="font-size:0.83rem; color:#cbd5e1; line-height:1.6; padding-left:18px; display:flex; flex-direction:column; gap:8px;">
             <li><strong>State-Space Explosion:</strong> Multi-vehicle sequencing across \(N\) customers spans \(\mathcal{O}(N! \cdot K^N)\) states.</li>
             <li><strong>Greedy Nearest-Neighbor Traps:</strong> Consumes nearby pickups early, stranding peripheral stops and triggering severe time-window lateness.</li>
             <li><strong>Corridor Jamming:</strong> Uncoordinated A* routes funnel all vehicles onto the same arterial road, inflating the BPR \((v/c)^4\) delay.</li>
@@ -480,10 +480,10 @@
 
         <div class="algo-compare-card viable">
           <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
-            <h4 style="color:#ffffff; font-size:1.05rem;">✅ How QuRoute QPSO + A* Solves It</h4>
+            <h4 style="color:#00f2fe; font-size:1.05rem;">✅ How QuRoute QPSO + A* Solves It</h4>
             <span class="badge-tag">HYBRID SWARM</span>
           </div>
-          <ul style="font-size:0.83rem; color:#d4d4d8; line-height:1.6; padding-left:18px; display:flex; flex-direction:column; gap:8px;">
+          <ul style="font-size:0.83rem; color:#cbd5e1; line-height:1.6; padding-left:18px; display:flex; flex-direction:column; gap:8px;">
             <li><strong>Macro-Tier QPSO:</strong> Optimizes fleet partitioning, capacity loads, and customer ordering via Laplace potential-well wave collapse.</li>
             <li><strong>Micro-Tier Dijkstra/A*:</strong> Precomputes exact shortest-path matrices per 15-min BPR traffic bucket and traces street-level routes.</li>
             <li><strong>Warm-Started Dynamic Recovery:</strong> Re-routes around live roadblocks in under 50 ms without cold-start overhead.</li>
@@ -496,15 +496,15 @@
         <div style="display:grid; grid-template-columns: repeat(4, 1fr); gap:12px;">
           <div class="stat-item">
             <div class="stat-title">QuRoute QPSO Travel Time</div>
-            <div class="stat-value" id="h2hQpsoTime" style="color:#ffffff;">--</div>
+            <div class="stat-value" id="h2hQpsoTime" style="color:#00f2fe;">--</div>
           </div>
           <div class="stat-item">
             <div class="stat-title">A* Greedy Fleet Travel Time</div>
-            <div class="stat-value" id="h2hAstarTime" style="color:#f87171;">--</div>
+            <div class="stat-value" id="h2hAstarTime" style="color:#f43f5e;">--</div>
           </div>
           <div class="stat-item">
             <div class="stat-title">QPSO Efficiency Advantage</div>
-            <div class="stat-value" id="h2hAdvantage" style="color:#34d399;">--%</div>
+            <div class="stat-value" id="h2hAdvantage" style="color:#10b981;">--%</div>
           </div>
           <div class="stat-item">
             <div class="stat-title">Time Window Violations</div>
@@ -519,7 +519,7 @@
       <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
         <div>
           <h2 style="font-size:1.35rem; font-weight:800; color:#fff;">QuRoute Evidence: Claims-to-Tests, Wilcoxon & SDG 11/13 Impact</h2>
-          <div style="font-size:0.82rem; color:#a1a1aa;">
+          <div style="font-size:0.82rem; color:#94a3b8;">
             30-Seed Wilcoxon Signed-Rank Significance (Holm-Corrected), Warm-Start Re-routing Benchmark & UN SDG Sustainability Metrics.
           </div>
         </div>
@@ -533,7 +533,7 @@
       <div class="pitch-container" style="margin-bottom:16px;">
         <div style="display:flex; align-items:center; gap:8px; margin-bottom:6px;">
           <span style="font-size:1.2rem;">🏆</span>
-          <span style="font-weight:800; font-size:1.0rem; color:#ffffff;">Measured Empirical Summary (Wilcoxon Signed-Rank Verified)</span>
+          <span style="font-weight:800; font-size:1.0rem; color:#00f2fe;">Measured Empirical Summary (Wilcoxon Signed-Rank Verified)</span>
         </div>
         <div id="empiricalPitchText">
           Across equal-budget trials on a 12-node BPR dynamic network, <strong>QuRoute QPSO achieved 14.8% lower average route travel time (Wilcoxon signed-rank p = 0.0008)</strong> and converged in <strong>36.5% fewer evaluations</strong> than Classical PSO, with <strong>44.2% lower variance</strong>. QuRoute QPSO attained a verified optimality gap of <strong>1.38%</strong> relative to the CP-SAT exact MIP optimum, and warm-started incident re-routing completed in <strong>31.4 ms (58.2x faster than CP-SAT)</strong>.
@@ -560,30 +560,30 @@
             <tr>
               <td><strong>&lt; 2% Optimality Gap</strong> (Slide 5)</td>
               <td>QPSO vs. CP-SAT Exact MIP (≤15 nodes) &amp; Solomon C101</td>
-              <td style="color:#38bdf8; font-weight:700;">1.38% Gap</td>
+              <td style="color:#00f2fe; font-weight:700;">1.38% Gap</td>
               <td>Exact Ground Truth</td>
-              <td><span class="badge-tag" style="border-color:#34d399; color:#34d399;">VERIFIED (&lt;2%)</span></td>
+              <td><span class="badge-tag" style="border-color:#10b981; color:#10b981;">VERIFIED (&lt;2%)</span></td>
             </tr>
             <tr>
               <td><strong>40x Faster Re-routing than CP-SAT</strong> (Slide 5)</td>
               <td>Warm-Started QPSO vs. CP-SAT on Mid-Route Incident</td>
-              <td style="color:#38bdf8; font-weight:700;">58.2x Faster (31.4 ms vs 1828 ms)</td>
+              <td style="color:#00f2fe; font-weight:700;">58.2x Faster (31.4 ms vs 1828 ms)</td>
               <td>p &lt; 0.0001</td>
-              <td><span class="badge-tag" style="border-color:#34d399; color:#34d399;">VERIFIED</span></td>
+              <td><span class="badge-tag" style="border-color:#10b981; color:#10b981;">VERIFIED</span></td>
             </tr>
             <tr>
               <td><strong>Sub-Second Convergence</strong> (Slide 5)</td>
               <td>Wall-Clock Time to within 1% of Final Cost (Fleet Pilot Tier)</td>
-              <td style="color:#38bdf8; font-weight:700;">142.0 ms (Cold) / 31.4 ms (Warm)</td>
+              <td style="color:#00f2fe; font-weight:700;">142.0 ms (Cold) / 31.4 ms (Warm)</td>
               <td>100% &lt; 1.0s</td>
-              <td><span class="badge-tag" style="border-color:#34d399; color:#34d399;">VERIFIED</span></td>
+              <td><span class="badge-tag" style="border-color:#10b981; color:#10b981;">VERIFIED</span></td>
             </tr>
             <tr>
               <td><strong>Beats PSO/GA on Local Optima</strong> (Slide 5)</td>
               <td>Paired Wilcoxon Signed-Rank Test under Equal Eval Budget</td>
-              <td style="color:#38bdf8; font-weight:700;">+14.8% Improvement, SD ±2.14 vs ±5.62</td>
+              <td style="color:#00f2fe; font-weight:700;">+14.8% Improvement, SD ±2.14 vs ±5.62</td>
               <td>p = 0.00084</td>
-              <td><span class="badge-tag" style="border-color:#34d399; color:#34d399;">SIGNIFICANT (p &lt; 0.05)</span></td>
+              <td><span class="badge-tag" style="border-color:#10b981; color:#10b981;">SIGNIFICANT (p &lt; 0.05)</span></td>
             </tr>
           </tbody>
         </table>
@@ -603,12 +603,12 @@
       </div>
 
       <!-- UN SDG 11 & SDG 13 Sustainability Impact View (Slide 4) -->
-      <div class="card" style="margin-bottom:16px; border-left: 4px solid #34d399;">
-        <div class="card-title" style="color:#34d399;">🌱 UN SDG 11 (Sustainable Cities) &amp; SDG 13 (Climate Action) Impact Assessment</div>
+      <div class="card" style="margin-bottom:16px; border-left: 4px solid #10b981;">
+        <div class="card-title" style="color:#10b981;">🌱 UN SDG 11 (Sustainable Cities) &amp; SDG 13 (Climate Action) Impact Assessment</div>
         <div style="display:grid; grid-template-columns: repeat(4, 1fr); gap:12px; margin-bottom:12px;">
           <div class="stat-item">
             <div class="stat-title">Travel Time Saved / Dispatch</div>
-            <div class="stat-value" id="sdgTimeSaved" style="color:#34d399;">25.7 min (15.3%)</div>
+            <div class="stat-value" id="sdgTimeSaved" style="color:#10b981;">25.7 min (15.3%)</div>
           </div>
           <div class="stat-item">
             <div class="stat-title">Congested Corridor (v/c &gt; 1) Avoided</div>
@@ -620,10 +620,10 @@
           </div>
           <div class="stat-item">
             <div class="stat-title">CO₂ Mitigated (Annual 50-Fleet)</div>
-            <div class="stat-value" id="sdgCo2Saved" style="color:#ffffff;">96.4 Tonnes/yr</div>
+            <div class="stat-value" id="sdgCo2Saved" style="color:#00f2fe;">96.4 Tonnes/yr</div>
           </div>
         </div>
-        <div style="font-size:0.76rem; color:#a1a1aa; line-height:1.5; background:rgba(0,0,0,0.25); padding:8px 12px; border-radius:6px;">
+        <div style="font-size:0.76rem; color:#94a3b8; line-height:1.5; background:rgba(0,0,0,0.25); padding:8px 12px; border-radius:6px;">
           <strong>Explicit Conversion Assumptions &amp; Citations:</strong>
           (1) Urban LCV stop-and-go congestion fuel consumption = <code>0.14 L/min</code> (Central Road Research Institute [CRRI] New Delhi Road User Cost Study).
           (2) Diesel carbon intensity = <code>2.68 kg CO₂ / Liter</code> (IPCC 2006 National Greenhouse Gas Inventory Guidelines).
