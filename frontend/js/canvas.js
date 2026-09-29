@@ -45,12 +45,12 @@ class NetworkCanvas {
     this.isAnimating = false;
 
     this.vehicleColors = [
-      '#00f2fe', // Cyan (Vehicle 1)
-      '#a855f7', // Purple (Vehicle 2)
-      '#10b981', // Emerald (Vehicle 3)
-      '#f59e0b', // Amber (Vehicle 4)
-      '#ec4899', // Pink (Vehicle 5)
-      '#3b82f6', // Blue (Vehicle 6)
+      '#38bdf8', // Soft Sky Blue (Vehicle 1)
+      '#818cf8', // Soft Indigo (Vehicle 2)
+      '#34d399', // Soft Emerald (Vehicle 3)
+      '#fbbf24', // Soft Amber (Vehicle 4)
+      '#f472b6', // Soft Rose Pink (Vehicle 5)
+      '#a78bfa', // Soft Lavender (Vehicle 6)
     ];
 
     this.initEvents();
@@ -366,10 +366,10 @@ class NetworkCanvas {
   }
 
   getCongestionColor(multiplier) {
-    if (multiplier <= 1.05) return 'rgba(74, 222, 128, 0.40)'; // Free flow green
-    if (multiplier <= 1.6) return 'rgba(250, 204, 21, 0.60)';  // Moderate yellow
-    if (multiplier <= 2.8) return 'rgba(249, 115, 22, 0.80)';  // Heavy orange
-    return 'rgba(239, 68, 68, 0.90)';                          // Severe red
+    if (multiplier <= 1.05) return 'rgba(161, 161, 170, 0.35)'; // Free flow neutral
+    if (multiplier <= 1.6) return 'rgba(251, 191, 36, 0.55)';  // Moderate soft amber
+    if (multiplier <= 2.8) return 'rgba(251, 146, 60, 0.70)';  // Heavy soft orange
+    return 'rgba(248, 113, 113, 0.85)';                        // Severe soft red
   }
 
   drawStreetRoutes(ctx, nodesById) {
@@ -392,13 +392,11 @@ class NetworkCanvas {
       const coords = vRoute.street_coordinates;
       if (!coords || coords.length < 2) return;
 
-      // 1. Base glowing street path
+      // 1. Base clean street path (soft, no blinding neon glow)
       ctx.save();
       ctx.beginPath();
       ctx.strokeStyle = color;
-      ctx.lineWidth = isHighlighted ? 6.0 : 4.5;
-      ctx.shadowColor = color;
-      ctx.shadowBlur = isHighlighted ? 18 : 10;
+      ctx.lineWidth = isHighlighted ? 4.5 : 3.2;
       ctx.lineCap = 'round';
       ctx.lineJoin = 'round';
 
@@ -414,9 +412,8 @@ class NetworkCanvas {
       // 2. Animated pulse overlay moving forward along streets
       ctx.beginPath();
       ctx.strokeStyle = '#ffffff';
-      ctx.lineWidth = 2.0;
-      ctx.shadowBlur = 0;
-      ctx.setLineDash([8, 12]);
+      ctx.lineWidth = 1.8;
+      ctx.setLineDash([6, 10]);
       ctx.lineDashOffset = -this.dashOffset;
 
       ctx.moveTo(firstPt.x, firstPt.y);
@@ -435,16 +432,16 @@ class NetworkCanvas {
         ctx.save();
         ctx.fillStyle = color;
         ctx.beginPath();
-        ctx.roundRect(midPt.x - 14, midPt.y - 9, 28, 18, 4);
+        ctx.roundRect(midPt.x - 13, midPt.y - 8, 26, 16, 4);
         ctx.fill();
-        ctx.strokeStyle = '#0b0f19';
-        ctx.lineWidth = 1.5;
+        ctx.strokeStyle = '#18181b';
+        ctx.lineWidth = 1.2;
         ctx.stroke();
 
-        ctx.fillStyle = '#0b0f19';
-        ctx.font = 'bold 10px Inter, sans-serif';
+        ctx.fillStyle = '#09090b';
+        ctx.font = 'bold 9px Inter, sans-serif';
         ctx.textAlign = 'center';
-        ctx.fillText(`V${vIdx + 1}`, midPt.x, midPt.y + 4);
+        ctx.fillText(`V${vIdx + 1}`, midPt.x, midPt.y + 3.5);
         ctx.restore();
       }
     });
@@ -454,15 +451,12 @@ class NetworkCanvas {
     if (!this.astarResult || !this.astarResult.coordinates || this.astarResult.coordinates.length < 2) return;
 
     const coords = this.astarResult.coordinates;
-    const astarColor = '#fbbf24'; // Radiant Gold
+    const astarColor = '#fbbf24'; // Soft warm gold
 
     ctx.save();
-    // Glowing golden path
     ctx.beginPath();
     ctx.strokeStyle = astarColor;
-    ctx.lineWidth = 6.0;
-    ctx.shadowColor = astarColor;
-    ctx.shadowBlur = 20;
+    ctx.lineWidth = 4.5;
     ctx.lineCap = 'round';
     ctx.lineJoin = 'round';
 
@@ -503,10 +497,8 @@ class NetworkCanvas {
         // Special A* markers
         ctx.save();
         ctx.beginPath();
-        ctx.arc(pos.x, pos.y, 14, 0, Math.PI * 2);
+        ctx.arc(pos.x, pos.y, 13, 0, Math.PI * 2);
         ctx.fillStyle = isAStarStart ? '#10b981' : '#f59e0b';
-        ctx.shadowColor = isAStarStart ? '#10b981' : '#f59e0b';
-        ctx.shadowBlur = 15;
         ctx.fill();
         ctx.strokeStyle = '#ffffff';
         ctx.lineWidth = 2;
@@ -521,37 +513,35 @@ class NetworkCanvas {
       }
 
       if (node.type === 'depot') {
-        // Golden diamond
+        // Soft golden amber diamond
         ctx.save();
         ctx.translate(pos.x, pos.y);
         ctx.rotate(Math.PI / 4);
 
-        ctx.fillStyle = '#eab308';
-        ctx.shadowColor = '#eab308';
-        ctx.shadowBlur = 14;
-        ctx.fillRect(-10, -10, 20, 20);
+        ctx.fillStyle = '#f59e0b';
+        ctx.fillRect(-9, -9, 18, 18);
 
         if (isSelected) {
           ctx.strokeStyle = '#ffffff';
-          ctx.lineWidth = 3.0;
-          ctx.strokeRect(-13, -13, 26, 26);
+          ctx.lineWidth = 2.5;
+          ctx.strokeRect(-12, -12, 24, 24);
         }
         ctx.restore();
 
-        ctx.fillStyle = '#fde047';
-        ctx.font = 'bold 11px Inter, sans-serif';
+        ctx.fillStyle = '#ffffff';
+        ctx.font = 'bold 10px Inter, sans-serif';
         ctx.textAlign = 'center';
-        ctx.fillText('DEPOT', pos.x, pos.y - 15);
+        ctx.fillText('DEPOT', pos.x, pos.y - 14);
 
       } else if (node.type === 'customer') {
         // Customer target with demand badge
         ctx.beginPath();
-        ctx.arc(pos.x, pos.y, 9, 0, Math.PI * 2);
-        ctx.fillStyle = '#0284c7';
+        ctx.arc(pos.x, pos.y, 8.5, 0, Math.PI * 2);
+        ctx.fillStyle = '#2563eb';
         ctx.fill();
 
-        ctx.strokeStyle = isSelected ? '#38bdf8' : '#e0f2fe';
-        ctx.lineWidth = isSelected ? 3.5 : 1.8;
+        ctx.strokeStyle = isSelected ? '#ffffff' : '#93c5fd';
+        ctx.lineWidth = isSelected ? 3.0 : 1.5;
         ctx.stroke();
 
         ctx.fillStyle = '#ffffff';

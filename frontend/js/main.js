@@ -287,7 +287,7 @@ function renderBuilderOutcome(result) {
   container.innerHTML = '';
 
   const details = result.evaluation ? result.evaluation.route_details : [];
-  const colors = ['#00f2fe', '#a855f7', '#10b981', '#f59e0b', '#ec4899', '#3b82f6'];
+  const colors = ['#38bdf8', '#818cf8', '#34d399', '#fbbf24', '#f472b6', '#a78bfa'];
 
   details.forEach((det, idx) => {
     const vCard = document.createElement('div');
@@ -483,9 +483,9 @@ function initScreen3() {
       datasets: [{
         label: 'Best Route Cost (Travel Time)',
         data: [],
-        borderColor: '#00f2fe',
-        backgroundColor: 'rgba(0, 242, 254, 0.1)',
-        borderWidth: 2.5,
+        borderColor: '#38bdf8',
+        backgroundColor: 'rgba(56, 189, 248, 0.08)',
+        borderWidth: 2.2,
         fill: true,
         tension: 0.2,
       }]
@@ -494,11 +494,11 @@ function initScreen3() {
       responsive: true,
       maintainAspectRatio: false,
       scales: {
-        x: { grid: { color: '#243456' }, ticks: { color: '#94a3b8' } },
-        y: { grid: { color: '#243456' }, ticks: { color: '#94a3b8' } }
+        x: { grid: { color: '#27272a' }, ticks: { color: '#a1a1aa' } },
+        y: { grid: { color: '#27272a' }, ticks: { color: '#a1a1aa' } }
       },
       plugins: {
-        legend: { labels: { color: '#f8fafc' } }
+        legend: { labels: { color: '#f4f4f5' } }
       }
     }
   });
@@ -618,7 +618,7 @@ function renderSingleManifest(res) {
   container.innerHTML = '';
 
   const details = res.evaluation ? res.evaluation.route_details : [];
-  const colors = ['#00f2fe', '#a855f7', '#10b981', '#f59e0b', '#ec4899', '#3b82f6'];
+  const colors = ['#38bdf8', '#818cf8', '#34d399', '#fbbf24', '#f472b6', '#a78bfa'];
 
   details.forEach((det, idx) => {
     const vCard = document.createElement('div');
@@ -629,7 +629,7 @@ function renderSingleManifest(res) {
       stepsHtml += `
         <div class="stop-step">
           <span>Node ${st.from_node} ➔ Node ${st.to_node}</span>
-          <span style="color:#00f2fe;">+${st.leg_travel_time}m (Arr: ${st.arrival_time}m)</span>
+          <span style="color:#38bdf8;">+${st.leg_travel_time}m (Arr: ${st.arrival_time}m)</span>
         </div>
       `;
     });
@@ -637,7 +637,7 @@ function renderSingleManifest(res) {
     vCard.innerHTML = `
       <div class="vehicle-card-header">
         <span class="vehicle-pill" style="background:${colors[idx % colors.length]};">Vehicle ${idx + 1}</span>
-        <span style="font-size:0.75rem; color:#94a3b8;">${det.travel_time} min | Load: ${det.load}/${det.capacity}</span>
+        <span style="font-size:0.75rem; color:#a1a1aa;">${det.travel_time} min | Load: ${det.load}/${det.capacity}</span>
       </div>
       <div class="turn-by-turn-list">${stepsHtml}</div>
     `;
@@ -661,10 +661,10 @@ function renderSingleManifest(res) {
 function initScreen4() {
   const ctx = document.getElementById('raceConvergenceChart').getContext('2d');
   const solverColors = {
-    qpso: '#00f2fe',
-    pso: '#f59e0b',
-    ga: '#10b981',
-    aco: '#9d4edd',
+    qpso: '#38bdf8',
+    pso: '#fbbf24',
+    ga: '#34d399',
+    aco: '#a78bfa',
   };
 
   appState.raceChart = new Chart(ctx, {
@@ -672,7 +672,7 @@ function initScreen4() {
     data: {
       labels: [],
       datasets: [
-        { label: 'QPSO (Quantum Swarm)', data: [], borderColor: solverColors.qpso, borderWidth: 3, tension: 0.2 },
+        { label: 'QPSO (Quantum Swarm)', data: [], borderColor: solverColors.qpso, borderWidth: 2.5, tension: 0.2 },
         { label: 'Classical PSO', data: [], borderColor: solverColors.pso, borderWidth: 2, tension: 0.2 },
         { label: 'Genetic Algorithm', data: [], borderColor: solverColors.ga, borderWidth: 2, tension: 0.2 },
         { label: 'Ant Colony Optimization', data: [], borderColor: solverColors.aco, borderWidth: 2, tension: 0.2 },
@@ -682,10 +682,10 @@ function initScreen4() {
       responsive: true,
       maintainAspectRatio: false,
       scales: {
-        x: { grid: { color: '#243456' }, ticks: { color: '#94a3b8' } },
-        y: { grid: { color: '#243456' }, ticks: { color: '#94a3b8' } }
+        x: { grid: { color: '#27272a' }, ticks: { color: '#a1a1aa' } },
+        y: { grid: { color: '#27272a' }, ticks: { color: '#a1a1aa' } }
       },
-      plugins: { legend: { labels: { color: '#f8fafc' } } }
+      plugins: { legend: { labels: { color: '#f4f4f5' } } }
     }
   });
 
@@ -695,9 +695,9 @@ function initScreen4() {
     data: {
       labels: ['Solution Quality', 'Convergence Speed', 'Stability', 'Scalability', 'Feasibility'],
       datasets: [
-        { label: 'QPSO', data: [96, 94, 92, 95, 99], borderColor: '#00f2fe', backgroundColor: 'rgba(0, 242, 254, 0.2)' },
-        { label: 'PSO', data: [75, 78, 68, 70, 85], borderColor: '#f59e0b', backgroundColor: 'rgba(245, 158, 11, 0.15)' },
-        { label: 'GA', data: [82, 65, 75, 72, 88], borderColor: '#10b981', backgroundColor: 'rgba(16, 185, 129, 0.15)' },
+        { label: 'QPSO', data: [96, 94, 92, 95, 99], borderColor: '#38bdf8', backgroundColor: 'rgba(56, 189, 248, 0.15)' },
+        { label: 'PSO', data: [75, 78, 68, 70, 85], borderColor: '#fbbf24', backgroundColor: 'rgba(251, 191, 36, 0.10)' },
+        { label: 'GA', data: [82, 65, 75, 72, 88], borderColor: '#34d399', backgroundColor: 'rgba(52, 211, 153, 0.10)' },
       ]
     },
     options: {
@@ -705,13 +705,13 @@ function initScreen4() {
       maintainAspectRatio: false,
       scales: {
         r: {
-          grid: { color: '#243456' },
-          angleLines: { color: '#243456' },
-          pointLabels: { color: '#94a3b8', font: { size: 11 } },
+          grid: { color: '#27272a' },
+          angleLines: { color: '#27272a' },
+          pointLabels: { color: '#a1a1aa', font: { size: 11 } },
           ticks: { display: false, max: 100, min: 0 }
         }
       },
-      plugins: { legend: { labels: { color: '#f8fafc' } } }
+      plugins: { legend: { labels: { color: '#f4f4f5' } } }
     }
   });
 
@@ -918,7 +918,7 @@ function initScreen5() {
       datasets: [{
         label: 'Mean Route Cost (30-run sample)',
         data: [142.5, 214.8, 168.2, 161.4, 174.0, 138.2],
-        backgroundColor: ['#00f2fe', '#f43f5e', '#f59e0b', '#10b981', '#9d4edd', '#38bdf8'],
+        backgroundColor: ['#38bdf8', '#f87171', '#fbbf24', '#34d399', '#a78bfa', '#94a3b8'],
         borderRadius: 6,
       }]
     },
@@ -926,8 +926,8 @@ function initScreen5() {
       responsive: true,
       maintainAspectRatio: false,
       scales: {
-        x: { grid: { color: '#243456' }, ticks: { color: '#94a3b8' } },
-        y: { grid: { color: '#243456' }, ticks: { color: '#94a3b8' } }
+        x: { grid: { color: '#27272a' }, ticks: { color: '#a1a1aa' } },
+        y: { grid: { color: '#27272a' }, ticks: { color: '#a1a1aa' } }
       },
       plugins: { legend: { display: false } }
     }
@@ -939,20 +939,20 @@ function initScreen5() {
     data: {
       labels: [10, 25, 50, 100, 150],
       datasets: [
-        { label: 'QPSO Runtime (s)', data: [0.08, 0.22, 0.54, 1.35, 2.45], borderColor: '#00f2fe', tension: 0.2 },
-        { label: 'PSO Runtime (s)', data: [0.09, 0.26, 0.65, 1.72, 3.10], borderColor: '#f59e0b', tension: 0.2 },
-        { label: 'GA Runtime (s)', data: [0.15, 0.42, 1.10, 2.85, 5.20], borderColor: '#10b981', tension: 0.2 },
-        { label: 'ACO Runtime (s)', data: [0.25, 0.75, 2.10, 5.40, 9.80], borderColor: '#9d4edd', tension: 0.2 },
+        { label: 'QPSO Runtime (s)', data: [0.08, 0.22, 0.54, 1.35, 2.45], borderColor: '#38bdf8', tension: 0.2 },
+        { label: 'PSO Runtime (s)', data: [0.09, 0.26, 0.65, 1.72, 3.10], borderColor: '#fbbf24', tension: 0.2 },
+        { label: 'GA Runtime (s)', data: [0.15, 0.42, 1.10, 2.85, 5.20], borderColor: '#34d399', tension: 0.2 },
+        { label: 'ACO Runtime (s)', data: [0.25, 0.75, 2.10, 5.40, 9.80], borderColor: '#a78bfa', tension: 0.2 },
       ]
     },
     options: {
       responsive: true,
       maintainAspectRatio: false,
       scales: {
-        x: { grid: { color: '#243456' }, ticks: { color: '#94a3b8' }, title: { display: true, text: 'Number of Customer Nodes', color: '#94a3b8' } },
-        y: { grid: { color: '#243456' }, ticks: { color: '#94a3b8' }, title: { display: true, text: 'Execution Time (seconds)', color: '#94a3b8' } }
+        x: { grid: { color: '#27272a' }, ticks: { color: '#a1a1aa' }, title: { display: true, text: 'Number of Customer Nodes', color: '#a1a1aa' } },
+        y: { grid: { color: '#27272a' }, ticks: { color: '#a1a1aa' }, title: { display: true, text: 'Execution Time (seconds)', color: '#a1a1aa' } }
       },
-      plugins: { legend: { labels: { color: '#f8fafc' } } }
+      plugins: { legend: { labels: { color: '#f4f4f5' } } }
     }
   });
 
@@ -991,13 +991,13 @@ function initScreen5() {
           claimsBody.innerHTML = '';
           resp.claims_to_tests_table.forEach(c => {
             const tr = document.createElement('tr');
-            const statusColor = c.passed ? '#10b981' : '#f43f5e';
+            const statusColor = c.passed ? '#34d399' : '#f87171';
             const statusLabel = c.passed ? '✅ PASS' : '❌ FAIL';
             tr.innerHTML = `
-              <td style="font-weight:700; color:#f8fafc;">${c.claim}</td>
+              <td style="font-weight:700; color:#f4f4f5;">${c.claim}</td>
               <td>${c.test_protocol}</td>
               <td>${c.target_threshold}</td>
-              <td style="color:#00f2fe; font-weight:600;">${c.empirical_result}</td>
+              <td style="color:#38bdf8; font-weight:600;">${c.empirical_result}</td>
               <td><span class="badge-tag" style="color:${statusColor}; border-color:${statusColor};">${statusLabel}</span></td>
             `;
             claimsBody.appendChild(tr);
