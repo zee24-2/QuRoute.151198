@@ -519,6 +519,42 @@ function initScreen3() {
       const betaStart = parseFloat(document.getElementById('qpsoBetaStart').value);
       const betaEnd = parseFloat(document.getElementById('qpsoBetaEnd').value);
 
+      let fallbackTriggered = false;
+      const runHttpFallback = async () => {
+        if (fallbackTriggered) return;
+        fallbackTriggered = true;
+        try {
+          const res = await API.quickSolve({
+            solver_name: solverName,
+            max_iters: maxIters,
+            swarm_size: swarmSize,
+            beta_start: betaStart,
+            beta_end: betaEnd,
+            seed: 42,
+          });
+          const hist = res.convergence_history || [res.best_cost];
+          appState.convergenceChart.data.labels = hist.map((_, i) => i + 1);
+          appState.convergenceChart.data.datasets[0].data = hist;
+          appState.convergenceChart.update();
+
+          document.getElementById('singleCurrentCost').innerText = res.best_cost.toFixed(1);
+          document.getElementById('singleCurrentIter').innerText = hist.length;
+          document.getElementById('singleFinalCost').innerText = res.best_cost.toFixed(2);
+          document.getElementById('singleRuntime').innerText = `${res.wall_clock_time}s`;
+
+          appState.activeRoute = res.best_route;
+          appState.detailedStreetRoutes = res.detailed_street_routes;
+          appState.networkCanvas.setRoutes(res.best_route, res.detailed_street_routes);
+          renderSingleManifest(res);
+          showToast(`${solverName.toUpperCase()} optimization completed!`);
+        } catch (e) {
+          console.error("HTTP Fallback error:", e);
+        } finally {
+          btnRun.disabled = false;
+          btnRun.innerText = 'Run Optimization';
+        }
+      };
+
       const ws = API.createSolverWebSocket(
         (data) => {
           if (data.type === 'iteration_update') {
@@ -532,6 +568,7 @@ function initScreen3() {
             // Draw candidate route
             appState.networkCanvas.setRoutes(data.route);
           } else if (data.type === 'finished') {
+            fallbackTriggered = true;
             const res = data.result;
             btnRun.disabled = false;
             btnRun.innerText = 'Run Optimization';
@@ -549,10 +586,8 @@ function initScreen3() {
             ws.close();
           }
         },
-        (err) => {
-          console.error("WS error:", err);
-          btnRun.disabled = false;
-          btnRun.innerText = 'Run Optimization';
+        () => {
+          runHttpFallback();
         }
       );
 
@@ -566,6 +601,9 @@ function initScreen3() {
           beta_end: betaEnd,
           seed: 42,
         }));
+      };
+      ws.onclose = () => {
+        if (!fallbackTriggered) runHttpFallback();
       };
     });
   }
@@ -690,6 +728,38 @@ function initScreen4() {
       const tbody = document.getElementById('scoreboardBody');
       tbody.innerHTML = '<tr><td colspan="6" style="text-align:center; color:#94a3b8;">Racing across identical traffic field...</td></tr>';
 
+      let raceFallbackDone = false;
+      const runRaceHttpFallback = async () => {
+        if (raceFallbackDone) return;
+        raceFallbackDone = true;
+        try {
+          const solverKeys = ['qpso', 'pso', 'ga', 'aco'];
+          const results = await Promise.all(
+            solverKeys.map(k => API.quickSolve({ solver_name: k, max_iters: 80, swarm_size: 25, seed: 42 }))
+          );
+          let maxLen = 0;
+          results.forEach((res, idx) => {
+            const k = solverKeys[idx];
+            appState.raceResults[k] = res;
+            const hist = res.convergence_history || [res.best_cost];
+            if (hist.length > maxLen) maxLen = hist.length;
+            appState.raceChart.data.datasets[idx].data = hist.map((yVal, i) => ({ x: i + 1, y: yVal }));
+            if (k === 'qpso') {
+              appState.networkCanvas.setRoutes(res.best_route, res.detailed_street_routes);
+            }
+          });
+          appState.raceChart.data.labels = Array.from({ length: maxLen }, (_, i) => i + 1);
+          appState.raceChart.update();
+          updateScoreboard();
+          showToast('Benchmark race completed!');
+        } catch (e) {
+          console.error("Race HTTP fallback error:", e);
+        } finally {
+          btnRace.disabled = false;
+          btnRace.innerText = 'START LIVE BENCHMARK RACE';
+        }
+      };
+
       const ws = API.createSolverWebSocket(
         (data) => {
           if (data.type === 'race_step') {
@@ -706,16 +776,15 @@ function initScreen4() {
             appState.raceResults[data.solver_key] = data.result;
             updateScoreboard();
           } else if (data.type === 'race_finished') {
+            raceFallbackDone = true;
             btnRace.disabled = false;
             btnRace.innerText = 'START LIVE BENCHMARK RACE';
             showToast('Benchmark race completed!');
             ws.close();
           }
         },
-        (err) => {
-          console.error("Race WS error:", err);
-          btnRace.disabled = false;
-          btnRace.innerText = 'START LIVE BENCHMARK RACE';
+        () => {
+          runRaceHttpFallback();
         }
       );
 
@@ -727,6 +796,9 @@ function initScreen4() {
           swarm_size: 30,
           seed: 42,
         }));
+      };
+      ws.onclose = () => {
+        if (!raceFallbackDone) runRaceHttpFallback();
       };
     });
   }
