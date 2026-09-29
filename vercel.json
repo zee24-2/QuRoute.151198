@@ -1,4 +1,22 @@
 {
-  "framework": null,
-  "buildCommand": null
+  "functions": {
+    "backend/app.py": {
+      "includeFiles": "frontend/**,backend/data/**",
+      "maxDuration": 60
+    },
+    "api/index.py": {
+      "includeFiles": "frontend/**,backend/data/**",
+      "maxDuration": 60
+    }
+  },
+  "routes": [
+    {
+      "src": "/static/(.*)",
+      "dest": "/frontend/$1"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/backend/app.py"
+    }
+  ]
 }

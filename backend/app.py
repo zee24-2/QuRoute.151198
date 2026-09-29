@@ -631,7 +631,11 @@ async def websocket_solver_stream(websocket: WebSocket):
             pass
 
 
-frontend_dir = os.path.join(os.path.dirname(os.path.dirname(__file__)), "frontend")
+base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+frontend_dir = os.path.join(base_dir, "frontend")
+if not os.path.exists(frontend_dir):
+    frontend_dir = os.path.join(os.getcwd(), "frontend")
+
 if os.path.exists(frontend_dir):
     app.mount("/static", StaticFiles(directory=frontend_dir), name="static")
 
@@ -641,4 +645,5 @@ def serve_index():
     index_path = os.path.join(frontend_dir, "index.html")
     if os.path.exists(index_path):
         return FileResponse(index_path)
-    return HTMLResponse("<h1>QuRoute — SIH26137</h1>")
+    return HTMLResponse("<h1>QuRoute — SIH26137 | Visionaries for Change</h1>")
+
